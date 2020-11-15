@@ -31,5 +31,12 @@ public class Comision {
         return fechaComision;
     }
 
-
+    @Override
+    public String toString() {
+        return "Comision{" +
+                "estadoComision=" + estadoComision +
+                ", comisionCalculada=" + comisionCalculada +
+                ", fechaComision=" + fechaComision +
+                '}';
+    }
 }

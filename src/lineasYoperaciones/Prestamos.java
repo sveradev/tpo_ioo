@@ -6,7 +6,7 @@ public class Prestamos extends Operacion {
 
 
 
-    enum TipoSistema{
+    public enum TipoSistema{
         FRANCES, ALEMAN, AMERICANO
     }
 
@@ -19,6 +19,22 @@ public class Prestamos extends Operacion {
     private int cantidadDePagas;
     private TipoSistema tipoSistema;
 
+
+    public Prestamos(double importeDeOperacion
+            , String banco
+            , double tasa
+            , Date fechaAcreditacion
+            , int cantidadDeCuotas
+            , int cantidadDePagas
+            , TipoSistema tipoSistema) {
+        super(importeDeOperacion);
+        this.banco = banco;
+        this.tasa = tasa;
+        this.fechaAcreditacion = fechaAcreditacion;
+        this.cantidadDeCuotas = cantidadDeCuotas;
+        this.cantidadDePagas = cantidadDePagas;
+        this.tipoSistema = tipoSistema;
+    }
 
     @Override
     public double importeVivo() {

@@ -10,16 +10,25 @@ public abstract class Operacion {
 
     protected Comision comision;
 
+    public Operacion(double importeDeOperacion
+            ) {
+        this.estadoOperacion = EstadoOperacion.INGRESADO;
+        this.importeDeOperacion = importeDeOperacion;
+        this.comision = new Comision();
+    }
 
+    public Comision getComision() {
+        return comision;
+    }
 
-
+    public double getImporteDeOperacion() {
+        return importeDeOperacion;
+    }
 
     public abstract double importeVivo();
 
 
     public abstract void emiteCertificado(String numeroCertificado);
-
-
 
 
 }

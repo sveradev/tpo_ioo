@@ -41,22 +41,36 @@ public class SocioParticipe extends Socio{
     }
 
 
-    public boolean abrirLineaCredito(Date fechaVencimiento
+    public boolean abrirLineaCredito(
+            Date fechaVencimiento
             , double montoMaximo
             , ArrayList<TipoOperacion> operacionesValidas){
         if (this.isPleno()){
-            lineaCredito = new LineaCredito(fechaVencimiento, montoMaximo, operacionesValidas);
+            System.out.println("Abriendo linea de credito");
+            lineaCredito = new LineaCredito(fechaVencimiento
+                    , montoMaximo
+                    , operacionesValidas);
             return true;
         }else {
+            System.out.println("Socio NO ES PLENO, no se puede abrir");
             return false;
         }
 
+    }
+
+    public LineaCredito getLineaCredito() {
+        return lineaCredito;
+    }
+
+    public int getAccionesA() {
+        return accionesA;
     }
 
     @Override
     public String toString() {
         return "SocioParticipe{" +
                 "accionesA=" + accionesA +
+                ", lineaCredito=" + lineaCredito +
                 '}';
     }
 }

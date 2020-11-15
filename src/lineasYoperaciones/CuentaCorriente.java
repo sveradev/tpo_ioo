@@ -3,7 +3,7 @@ package lineasYoperaciones;
 import java.util.Date;
 
 public class CuentaCorriente extends Operacion{
-    enum TipoCuentaCorriente{
+    public enum TipoCuentaCorriente{
         CUENTA_CORRIENTE, TARJETA_CREDITO
     }
 
@@ -13,6 +13,12 @@ public class CuentaCorriente extends Operacion{
     private Date fechaVencimiento;
     private double importeUtilizado;
 
+    public CuentaCorriente(double importeDeOperacion, String empresa, Date fechaVencimiento, double importeUtilizado) {
+        super(importeDeOperacion);
+        this.empresa = empresa;
+        this.fechaVencimiento = fechaVencimiento;
+        this.importeUtilizado = importeUtilizado;
+    }
 
     @Override
     public double importeVivo() {

@@ -4,11 +4,13 @@ import java.util.Date;
 
 public class Cheque extends Operacion {
 
-    enum TipoCheque {
-        PROPIO, TERCERO, PAGARE
+    public enum TipoCheque {
+        PROPIO
+        , TERCERO
+        , PAGARE
     }
 
-    private final static double PORCENTAJE_COMISION = 0.03;
+    public final static double PORCENTAJE_COMISION = 0.03;
 
     private TipoCheque tipoCheque;
     private String banco;
@@ -18,6 +20,22 @@ public class Cheque extends Operacion {
 
     private double tasaDescuento;
 
+
+    public Cheque(double importeDeOperacion
+            , TipoCheque tipoCheque
+            , String banco
+            , String numero
+            , Date fechaVencimiento
+            , String cuitFirmante
+            , double tasaDescuento) {
+        super(importeDeOperacion);
+        this.tipoCheque = tipoCheque;
+        this.banco = banco;
+        this.numero = numero;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cuitFirmante = cuitFirmante;
+        this.tasaDescuento = tasaDescuento;
+    }
 
     @Override
     public double importeVivo() {
@@ -30,4 +48,15 @@ public class Cheque extends Operacion {
         this.certificadoGarantia = numeroCertificado;
     }
 
+    @Override
+    public String toString() {
+        return "Cheque{" +
+                "tipoCheque=" + tipoCheque +
+                ", banco='" + banco + '\'' +
+                ", numero='" + numero + '\'' +
+                ", fechaVencimiento=" + fechaVencimiento +
+                ", cuitFirmante='" + cuitFirmante + '\'' +
+                ", tasaDescuento=" + tasaDescuento +
+                '}';
+    }
 }

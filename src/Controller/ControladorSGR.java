@@ -8,7 +8,7 @@ import Socios.SocioProtector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorSGR {
+public  class  ControladorSGR {
     private static List<SocioParticipe> socioParticipes;
     private static List<SocioProtector> socioProtectores;
 
@@ -25,7 +25,7 @@ public class ControladorSGR {
         return socioProtectores;
     }
 
-    public double calculaFDR() {
+    public static double calculaFDR() {
         double totalFdr = 0;
         for (SocioProtector socioProtector : socioProtectores) {
             for (Aportes aporte : socioProtector.getAportes()) {
