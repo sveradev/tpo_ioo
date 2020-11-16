@@ -1,5 +1,6 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.operacion.dominio;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Cheque extends Operacion {
@@ -21,7 +22,8 @@ public class Cheque extends Operacion {
     private double tasaDescuento;
 
 
-    public Cheque(double importeDeOperacion
+    public Cheque(
+        BigDecimal importeDeOperacion
             , TipoCheque tipoCheque
             , String banco
             , String numero
@@ -38,7 +40,7 @@ public class Cheque extends Operacion {
     }
 
     @Override
-    public double importeVivo() {
+    public BigDecimal importeVivo() {
         return this.importeDeOperacion;
     }
 

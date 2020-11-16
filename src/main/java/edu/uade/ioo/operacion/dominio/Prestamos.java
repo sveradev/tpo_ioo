@@ -1,5 +1,6 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.operacion.dominio;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Prestamos extends Operacion {
@@ -20,7 +21,8 @@ public class Prestamos extends Operacion {
     private TipoSistema tipoSistema;
 
 
-    public Prestamos(double importeDeOperacion
+    public Prestamos(
+        BigDecimal importeDeOperacion
             , String banco
             , double tasa
             , Date fechaAcreditacion
@@ -37,12 +39,12 @@ public class Prestamos extends Operacion {
     }
 
     @Override
-    public double importeVivo() {
+    public BigDecimal importeVivo() {
 
-        double importeCuota = importeDeOperacion/cantidadDeCuotas;
+        BigDecimal importeCuota = importeDeOperacion.divide(BigDecimal.valueOf(cantidadDeCuotas));
         int cuotasImpagas = cantidadDeCuotas-cantidadDePagas;
 
-        return importeCuota*cuotasImpagas;
+        return importeCuota.multiply(BigDecimal.valueOf(cuotasImpagas));
     }
 
     @Override

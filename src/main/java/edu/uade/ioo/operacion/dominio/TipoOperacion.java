@@ -1,4 +1,4 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.operacion.dominio;
 
 public enum TipoOperacion {
     CHEQUE, CUENTA, PRESTAMO

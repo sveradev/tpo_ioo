@@ -1,4 +1,4 @@
-package edu.uade.ioo.Socios;
+package edu.uade.ioo.socio.dominio;
 
 //import java.time.LocalDate;
 //import java.time.Period;
