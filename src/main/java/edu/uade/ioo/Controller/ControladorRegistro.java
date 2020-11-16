@@ -6,6 +6,4 @@ public class ControladorRegistro {
     public ControladorRegistro(ControladorSGR sistemaPrincipal) {
         this.sistemaPrincipal = sistemaPrincipal;
     }
-
-
 }

@@ -1,32 +1,32 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.lineaDeCredito.dominio;
 
 
 import edu.uade.ioo.Controller.ControladorSGR;
+import edu.uade.ioo.operacion.dominio.Cheque;
+import edu.uade.ioo.operacion.dominio.Operacion;
+import edu.uade.ioo.operacion.dominio.TipoOperacion;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 public class LineaCredito {
 
+    private Instant fechaInicio;
+    private Instant fechaVencimiento;
+    private BigDecimal montoMaximo;
+    private List<TipoOperacion> operacionesValidas;
+    private List<Operacion> operaciones;
 
-    private Date fechaVencimiento;
-    private double montoMaximo;
-    private ArrayList<TipoOperacion> operacionesValidas;
-    private ArrayList<Operacion> operaciones;
-
-
-    public LineaCredito(Date fechaVencimiento
-            , double montoMaximo
-            , ArrayList<TipoOperacion> operacionesValidas) {
+    public LineaCredito(final Instant fechaInicio, final Instant fechaVencimiento, final BigDecimal montoMaximo, final List<TipoOperacion> operacionesValidas) {
+        this.fechaInicio = fechaInicio;
         this.fechaVencimiento = fechaVencimiento;
         this.montoMaximo = montoMaximo;
         this.operacionesValidas = operacionesValidas;
-        this.operaciones = new ArrayList<>();
     }
 
-
-    public boolean crearOperacionCheque(double importeDeOperacion
+    public boolean crearOperacionCheque(BigDecimal importeDeOperacion
             , Cheque.TipoCheque tipoCheque
             , String banco
             , String numero
@@ -35,9 +35,9 @@ public class LineaCredito {
             , double tasaDescuento){
         double fdr = ControladorSGR.calculaFDR();
         if(this.estaVigente()
-            && importeDeOperacion < this.montoMaximo
+            && importeDeOperacion.compareTo(this.montoMaximo) < 0
             && this.operacionesValidas.contains(TipoOperacion.CHEQUE)
-            && importeDeOperacion < 0.05*fdr){
+            && importeDeOperacion.compareTo(BigDecimal.valueOf(0.05*fdr)) < 0){
             operaciones.add(
                     new Cheque(importeDeOperacion
                             ,tipoCheque
@@ -52,39 +52,35 @@ public class LineaCredito {
         }
         System.out.println("CONDICIONES NO CUMPLIDAS DE CREAR CHEQUE");
         System.out.println(this.estaVigente());
-        System.out.println(importeDeOperacion <= this.montoMaximo);
+        System.out.println(importeDeOperacion.compareTo(this.montoMaximo) > 0);
         System.out.println(this.operacionesValidas.contains(TipoOperacion.CHEQUE));
-        System.out.println(importeDeOperacion < 0.05*fdr);
+        System.out.println(importeDeOperacion.compareTo(BigDecimal.valueOf(0.05*fdr)) > 0 );
         return false;
     }
 
-
-
     public boolean estaVigente() {
-        Calendar actual = Calendar.getInstance();
-        Calendar vencimiento = Calendar.getInstance();
-        vencimiento.setTime(this.fechaVencimiento);
-
-        return actual.before(vencimiento);
+        return Instant.now().isAfter(this.fechaVencimiento);
     }
 
-    public Date getFechaVencimiento() {
+    public Instant getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public Instant getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public double getMontoMaximo() {
+    public BigDecimal getMontoMaximo() {
         return montoMaximo;
     }
 
-    public ArrayList<TipoOperacion> getOperacionesValidas() {
+    public List<TipoOperacion> getOperacionesValidas() {
         return operacionesValidas;
     }
 
-    public ArrayList<Operacion> getOperaciones() {
+    public List<Operacion> getOperaciones() {
         return operaciones;
     }
-
-
 
     @Override
     public String toString() {

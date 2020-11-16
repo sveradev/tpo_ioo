@@ -1,16 +1,17 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.operacion.dominio;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Comision {
-    private  EstadoComision estadoComision;
-    private  double comisionCalculada;
+    private EstadoComision estadoComision;
+    private  BigDecimal comisionCalculada;
     private  Date fechaComision;
 
 
-    public double calcularComision(double porcentaje, double importeDeOperacion){
+    public BigDecimal calcularComision(double porcentaje, BigDecimal importeDeOperacion){
         if (this.estadoComision == null){
-            this.comisionCalculada = porcentaje*importeDeOperacion;
+            this.comisionCalculada = importeDeOperacion.multiply(BigDecimal.valueOf(porcentaje));
             this.fechaComision = new Date();
             this.estadoComision = EstadoComision.CALCULADA;
         }
@@ -22,7 +23,7 @@ public class Comision {
     }
 
 
-    public double getComisionCalculada() {
+    public BigDecimal getComisionCalculada() {
         return comisionCalculada;
     }
 

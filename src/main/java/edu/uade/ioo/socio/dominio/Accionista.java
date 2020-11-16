@@ -1,4 +1,4 @@
-package edu.uade.ioo.Socios;
+package edu.uade.ioo.socio.dominio;
 
 public class Accionista {
     private String cuit;

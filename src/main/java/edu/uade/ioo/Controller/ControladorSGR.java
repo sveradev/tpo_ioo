@@ -1,9 +1,9 @@
 package edu.uade.ioo.Controller;
 
-import edu.uade.ioo.Socios.Aportes;
-import edu.uade.ioo.Socios.Socio;
-import edu.uade.ioo.Socios.SocioParticipe;
-import edu.uade.ioo.Socios.SocioProtector;
+import edu.uade.ioo.socio.dominio.Aportes;
+import edu.uade.ioo.socio.dominio.Socio;
+import edu.uade.ioo.socio.dominio.SocioParticipe;
+import edu.uade.ioo.socio.dominio.SocioProtector;
 
 import java.util.ArrayList;
 import java.util.List;

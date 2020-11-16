@@ -3,15 +3,18 @@ package edu.uade.ioo.testing;
 import edu.uade.ioo.Controller.ControladorRegistro;
 import edu.uade.ioo.Controller.ControladorSGR;
 
-import edu.uade.ioo.Socios.Accionista;
-import edu.uade.ioo.Socios.Aportes;
-import edu.uade.ioo.Socios.EstadoDocumentacion;
-import edu.uade.ioo.Socios.SocioParticipe;
-import edu.uade.ioo.Socios.SocioProtector;
-import edu.uade.ioo.lineasYoperaciones.Cheque;
-import edu.uade.ioo.lineasYoperaciones.Operacion;
-import edu.uade.ioo.lineasYoperaciones.TipoOperacion;
+import edu.uade.ioo.socio.dominio.Accionista;
+import edu.uade.ioo.socio.dominio.Aportes;
+import edu.uade.ioo.socio.dominio.SocioParticipe;
+import edu.uade.ioo.socio.dominio.SocioProtector;
+import edu.uade.ioo.operacion.dominio.Cheque;
+import edu.uade.ioo.operacion.dominio.Operacion;
+import edu.uade.ioo.operacion.dominio.TipoOperacion;
+import edu.uade.ioo.socio.dominio.TipoEmpresa;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,85 +22,67 @@ public class testing {
     public static void main(String[] args) {
 
         SocioProtector socPro1 = new SocioProtector("777-cuitsocPro1", "socPro1"
-                , new Date(110, 10, 10)
-                , "tipo"
+                , Instant.now()
+                , TipoEmpresa.PEQUENA
                 , "actividad"
                 , "direccion"
                 , "telefono"
                 , "email"
-                , new Date(115, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "usuarioIngreso"
                 , 465);
 
 
         SocioProtector socPro2 = new SocioProtector("333-cuitsocPro2"
                 , "socPro2"
-                , new Date(110, 10, 10)
-                , "tipo"
+                , Instant.now()
+                , TipoEmpresa.MEDIANA
                 , "actividad"
                 , "direccion"
                 , "telefono"
                 , "email"
-                , new Date(115, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "usuarioIngreso"
                 , 12);
 
 
         SocioProtector socPro3 = new SocioProtector("222-cuitsocPro3"
                 , "socPro3"
-                , new Date(110, 10, 10)
-                , "tipo"
+                , Instant.now()
+                , TipoEmpresa.MEDIANA
                 , "actividad"
                 , "direccion"
                 , "telefono"
                 , "email"
-                , new Date(115, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "usuarioIngreso"
                 , 32);
 
 
         SocioParticipe socPar1 = new SocioParticipe("222-cuitParticipe11"
                 , "socioparticipeRazon"
-                , new Date(110, 10, 10)
-                , "Pequenna"
+                , Instant.now()
+                , TipoEmpresa.PEQUENA
                 , "Venta insumos"
                 , "direccion 124"
                 , "telefono 532"
                 , "email@lalal.com"
-                , new Date(115, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "usuarioIngreso"
                 , 13);
 
 
         SocioParticipe socPar2 = new SocioParticipe("432-cuitParticipe22"
                 , "segundo socio participe"
-                , new Date(110, 10, 10)
-                , "Mediana"
+                , Instant.now()
+                , TipoEmpresa.MEDIANA
                 , "Venta de Sal"
                 , "otra dire 124"
                 , "CABA 011 34223 2532"
                 , "email@lalal.com"
-                , new Date(115, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "sebasTopu"
                 , 22);
 
 
         SocioParticipe socPar3 = new SocioParticipe("5234-cuitParticipe123"
                 , "Ocho Anclas"
-                , new Date(110, 10, 10)
-                , "Mediana"
+                , Instant.now()
+                , TipoEmpresa.MEDIANA
                 , "Alquiler de botes"
                 , "Baiha Costa"
                 , "CABA 011 34223 2532"
                 , "email@lalal.com"
-                , new Date(114, 10, 10)
-                , EstadoDocumentacion.INGRESADO
-                , "sebasTopu"
                 , 22);
 
 
@@ -190,19 +175,19 @@ public class testing {
         todasLasOperaciones.add(TipoOperacion.CUENTA);
         todasLasOperaciones.add(TipoOperacion.PRESTAMO);
 
-        sistemaPrincipal.getSocioParticipes().get(0).setPleno(true);
-        sistemaPrincipal.getSocioParticipes().get(1).setPleno(true);
-        sistemaPrincipal.getSocioParticipes().get(2).setPleno(true);
+        sistemaPrincipal.getSocioParticipes().get(0).activarSocio();
+        sistemaPrincipal.getSocioParticipes().get(1).activarSocio();
+        sistemaPrincipal.getSocioParticipes().get(2).activarSocio();
 
-        sistemaPrincipal.getSocioParticipes().get(0).abrirLineaCredito(new Date(124, 01, 01),
-                3000, soloCheques);
+        sistemaPrincipal.getSocioParticipes().get(0).abrirLineaCredito(Instant.now().plus(30, ChronoUnit.DAYS),
+                BigDecimal.valueOf(3000), soloCheques);
 
-        sistemaPrincipal.getSocioParticipes().get(1).abrirLineaCredito(new Date(125, 01, 01),
-                30000, todasLasOperaciones);
+        sistemaPrincipal.getSocioParticipes().get(1).abrirLineaCredito(Instant.now().plus(30, ChronoUnit.DAYS),
+            BigDecimal.valueOf(30000), todasLasOperaciones);
 
 
-        sistemaPrincipal.getSocioParticipes().get(2).abrirLineaCredito(new Date(100, 01, 01),
-                30000, todasLasOperaciones);
+        sistemaPrincipal.getSocioParticipes().get(2).abrirLineaCredito(Instant.now().plus(30, ChronoUnit.DAYS),
+            BigDecimal.valueOf(30000), todasLasOperaciones);
 
         System.out.println(socPar1.getLineaCredito().estaVigente());
         System.out.println(socPar2.getLineaCredito().estaVigente());
@@ -214,7 +199,7 @@ public class testing {
 
 
         socPar1.getLineaCredito().crearOperacionCheque(
-                                        1000
+                                        BigDecimal.valueOf(1000)
                                         , Cheque.TipoCheque.PROPIO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"
@@ -226,7 +211,7 @@ public class testing {
 
 
         socPar1.getLineaCredito().crearOperacionCheque(
-                                        2000
+                                        BigDecimal.valueOf(2000)
                                         , Cheque.TipoCheque.TERCERO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"
@@ -241,7 +226,7 @@ public class testing {
 
 
         socPar3.getLineaCredito().crearOperacionCheque(
-                                        200000000
+                                        BigDecimal.valueOf(200000000)
                                         , Cheque.TipoCheque.TERCERO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"

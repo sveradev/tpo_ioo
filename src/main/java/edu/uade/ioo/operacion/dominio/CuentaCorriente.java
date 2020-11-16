@@ -1,5 +1,6 @@
-package edu.uade.ioo.lineasYoperaciones;
+package edu.uade.ioo.operacion.dominio;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CuentaCorriente extends Operacion{
@@ -11,9 +12,9 @@ public class CuentaCorriente extends Operacion{
 
     private String empresa;
     private Date fechaVencimiento;
-    private double importeUtilizado;
+    private BigDecimal importeUtilizado;
 
-    public CuentaCorriente(double importeDeOperacion, String empresa, Date fechaVencimiento, double importeUtilizado) {
+    public CuentaCorriente(BigDecimal importeDeOperacion, String empresa, Date fechaVencimiento, BigDecimal importeUtilizado) {
         super(importeDeOperacion);
         this.empresa = empresa;
         this.fechaVencimiento = fechaVencimiento;
@@ -21,7 +22,7 @@ public class CuentaCorriente extends Operacion{
     }
 
     @Override
-    public double importeVivo() {
+    public BigDecimal importeVivo() {
         return importeUtilizado;
     }
 
