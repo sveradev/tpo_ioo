@@ -1,0 +1,82 @@
+package lineasYoperaciones;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+enum TipoOperacion {
+    UNO, DOS, TRES
+}
+
+public class LineaCredito {
+
+    private int monto;
+    private Date fechaVigencia;
+    private ArrayList<TipoOperacion> tiposOperaciones;
+    private ArrayList<Operacion> operaciones;
+
+    public LineaCredito() {
+        this.operaciones = new ArrayList<Operacion>();
+        this.tiposOperaciones = new ArrayList<TipoOperacion>();
+    }
+
+    public void addTipoOperacion(TipoOperacion tipo) {
+        this.tiposOperaciones.add(tipo);
+    }
+
+    public ArrayList<TipoOperacion> getTiposOperaciones() {
+        return tiposOperaciones;
+    }
+
+    public Date getFechaVigencia() {
+        return fechaVigencia;
+    }
+
+
+    /******NICO******/
+
+    public int getOperacionesMonetizadas(Date ini, Date fin) {
+        int total = 0;
+        for (Operacion operacion : operaciones) {
+            if ((operacion.getEstado().equals("MONETIZADO"))) {
+                if ( (operacion.getFechaEmision().after(ini) && operacion.getFechaEmision().before(fin)) ||
+                        (operacion.getFechaEmision().equals(ini) || operacion.getFechaEmision().equals(fin)))
+                    total += 1;
+            }
+        }
+        return total;
+    }
+
+    private Date sumarAños(Date fecha, int años) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.YEAR, años);
+        return calendar.getTime();
+    }
+
+    public boolean isVigente() {
+        if(this.fechaVigencia.before(sumarAños(this.fechaVigencia,2)))
+            return true;
+        else return false;
+    }
+
+
+    public double montoEnCheques(String firmante) {
+        double importeTotal = 0;
+        for (Operacion operacion : this.operaciones) {
+
+            if(operacion.getCodigoTipo() == 1) {
+                Cheque chq = (Cheque) operacion;
+                if(chq.getFirmante().equals(firmante))
+                    importeTotal += chq.getImporte();
+            }
+        }
+        return importeTotal;
+    }
+
+    public void addOperacion(Operacion operacion) {
+        this.operaciones.add(operacion);
+    }
+
+
+}

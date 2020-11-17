@@ -1,0 +1,1 @@
+module SGR {exports common;exports lineasYoperaciones;exports testing;exports Socios;exports Controller;exports vista;requires java.desktop;}

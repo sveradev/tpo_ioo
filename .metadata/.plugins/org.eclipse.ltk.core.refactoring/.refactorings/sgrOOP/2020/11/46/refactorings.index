@@ -1,0 +1,10 @@
+1604983280762	Rename enum constant 'ingresado'
+1605047890746	Encapsulate field 'numero'
+1605047895651	Encapsulate field 'importe'
+1605047900692	Encapsulate field 'comision'
+1605048289900	Encapsulate field 'vencimiento'
+1605048782644	Encapsulate field 'codigoTipo'
+1605048810280	Encapsulate field 'empresa'
+1605049679697	Encapsulate field 'banco'
+1605050154850	Move compilation unit
+1605050163981	Delete element
