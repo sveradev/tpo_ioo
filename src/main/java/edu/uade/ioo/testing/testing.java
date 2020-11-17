@@ -203,34 +203,27 @@ public class testing {
                                         , Cheque.TipoCheque.PROPIO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"
-                                        ,new Date(121, 3, 3)
+                                        ,Instant.now()
                                         ,"cuit32"
                                         ,0.5
                                             );
-
-
 
         socPar1.getLineaCredito().crearOperacionCheque(
                                         BigDecimal.valueOf(2000)
                                         , Cheque.TipoCheque.TERCERO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"
-                                        ,new Date(121, 3, 3)
+                                        ,Instant.now()
                                         ,"cuit32"
                                         ,0.5
                                             );
-
-
-
-
-
 
         socPar3.getLineaCredito().crearOperacionCheque(
                                         BigDecimal.valueOf(200000000)
                                         , Cheque.TipoCheque.TERCERO
                                         ,"Galicia"
                                         ,"Cheque Num 6351"
-                                        ,new Date(121, 3, 3)
+                                        ,Instant.now()
                                         ,"cuit32"
                                         ,0.5
                                             );
@@ -241,8 +234,6 @@ public class testing {
         operacion1.emiteCertificado("cert-Num-42323");
 
         System.out.println(operacion1.getComision().calcularComision(Cheque.PORCENTAJE_COMISION, operacion1.getImporteDeOperacion()));
-
-
 
     }
 

@@ -8,7 +8,7 @@ import edu.uade.ioo.operacion.dominio.TipoOperacion;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LineaCredito {
@@ -19,18 +19,19 @@ public class LineaCredito {
     private List<TipoOperacion> operacionesValidas;
     private List<Operacion> operaciones;
 
-    public LineaCredito(final Instant fechaInicio, final Instant fechaVencimiento, final BigDecimal montoMaximo, final List<TipoOperacion> operacionesValidas) {
+    public LineaCredito(final Instant fechaInicio, final Instant fechaVencimiento, final BigDecimal montoMaximo, final List<TipoOperacion> operacionesValidas,List<Operacion> operaciones) {
         this.fechaInicio = fechaInicio;
         this.fechaVencimiento = fechaVencimiento;
         this.montoMaximo = montoMaximo;
         this.operacionesValidas = operacionesValidas;
+        this.operaciones = operaciones;
     }
 
     public boolean crearOperacionCheque(BigDecimal importeDeOperacion
             , Cheque.TipoCheque tipoCheque
             , String banco
             , String numero
-            , Date fechaVencimiento
+            , Instant fechaVencimiento
             , String cuitFirmante
             , double tasaDescuento){
         double fdr = ControladorSGR.calculaFDR();
@@ -38,15 +39,13 @@ public class LineaCredito {
             && importeDeOperacion.compareTo(this.montoMaximo) < 0
             && this.operacionesValidas.contains(TipoOperacion.CHEQUE)
             && importeDeOperacion.compareTo(BigDecimal.valueOf(0.05*fdr)) < 0){
-            operaciones.add(
-                    new Cheque(importeDeOperacion
-                            ,tipoCheque
-                            ,banco
-                            ,numero
-                            ,fechaVencimiento
-                            ,cuitFirmante
-                            ,tasaDescuento)
-            );
+            operaciones.add(new Cheque(importeDeOperacion
+            			, tipoCheque
+            			, cuitFirmante
+            			, cuitFirmante
+            			, fechaInicio
+            			, cuitFirmante
+            			, fdr));
             System.out.println("Operacion Creada");
             return true;
         }
@@ -59,7 +58,7 @@ public class LineaCredito {
     }
 
     public boolean estaVigente() {
-        return Instant.now().isAfter(this.fechaVencimiento);
+        return Instant.now().isBefore(this.fechaVencimiento);
     }
 
     public Instant getFechaInicio() {

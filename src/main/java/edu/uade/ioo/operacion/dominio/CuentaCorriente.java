@@ -1,6 +1,7 @@
 package edu.uade.ioo.operacion.dominio;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 
 public class CuentaCorriente extends Operacion{
@@ -11,10 +12,10 @@ public class CuentaCorriente extends Operacion{
     private final static double PORCENTAJE_COMISION = 0.03;
 
     private String empresa;
-    private Date fechaVencimiento;
+    private Instant fechaVencimiento;
     private BigDecimal importeUtilizado;
 
-    public CuentaCorriente(BigDecimal importeDeOperacion, String empresa, Date fechaVencimiento, BigDecimal importeUtilizado) {
+    public CuentaCorriente(BigDecimal importeDeOperacion, String empresa, Instant fechaVencimiento, BigDecimal importeUtilizado) {
         super(importeDeOperacion);
         this.empresa = empresa;
         this.fechaVencimiento = fechaVencimiento;

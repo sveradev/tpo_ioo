@@ -1,11 +1,9 @@
 package edu.uade.ioo.operacion.dominio;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 
 public class Prestamos extends Operacion {
-
-
 
     public enum TipoSistema{
         FRANCES, ALEMAN, AMERICANO
@@ -14,8 +12,8 @@ public class Prestamos extends Operacion {
     private final static double PORCENTAJE_COMISION = 0.04;
 
     private String banco;
-    private double tasa;
-    private Date fechaAcreditacion;
+    private BigDecimal tasa;
+    private Instant fechaAcreditacion;
     private int cantidadDeCuotas;
     private int cantidadDePagas;
     private TipoSistema tipoSistema;
@@ -24,8 +22,8 @@ public class Prestamos extends Operacion {
     public Prestamos(
         BigDecimal importeDeOperacion
             , String banco
-            , double tasa
-            , Date fechaAcreditacion
+            , BigDecimal tasa
+            , Instant fechaAcreditacion
             , int cantidadDeCuotas
             , int cantidadDePagas
             , TipoSistema tipoSistema) {

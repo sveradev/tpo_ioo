@@ -36,7 +36,8 @@ public class SocioParticipe extends Socio {
                 Instant.now(),
                 fechaVencimiento,
                 montoMaximo,
-                operacionesValidas);
+                operacionesValidas,
+                new ArrayList<>());
             return true;
         }else {
             System.out.println("Socio NO ES PLENO, no se puede abrir");

@@ -1,18 +1,18 @@
 package edu.uade.ioo.operacion.dominio;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 
 public class Comision {
     private EstadoComision estadoComision;
     private  BigDecimal comisionCalculada;
-    private  Date fechaComision;
+    private  Instant fechaComision;
 
 
     public BigDecimal calcularComision(double porcentaje, BigDecimal importeDeOperacion){
         if (this.estadoComision == null){
             this.comisionCalculada = importeDeOperacion.multiply(BigDecimal.valueOf(porcentaje));
-            this.fechaComision = new Date();
+            this.fechaComision = Instant.now();
             this.estadoComision = EstadoComision.CALCULADA;
         }
         return comisionCalculada;
@@ -28,7 +28,7 @@ public class Comision {
     }
 
 
-    public Date getFechaComision() {
+    public Instant getFechaComision() {
         return fechaComision;
     }
 

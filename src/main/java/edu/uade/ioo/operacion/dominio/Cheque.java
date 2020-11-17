@@ -1,7 +1,7 @@
 package edu.uade.ioo.operacion.dominio;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 
 public class Cheque extends Operacion {
 
@@ -16,7 +16,7 @@ public class Cheque extends Operacion {
     private TipoCheque tipoCheque;
     private String banco;
     private String numero;
-    private Date fechaVencimiento;
+    private Instant fechaVencimiento;
     private String cuitFirmante;
 
     private double tasaDescuento;
@@ -27,14 +27,14 @@ public class Cheque extends Operacion {
             , TipoCheque tipoCheque
             , String banco
             , String numero
-            , Date fechaVencimiento
+            , Instant fechaVencimiento2
             , String cuitFirmante
             , double tasaDescuento) {
         super(importeDeOperacion);
         this.tipoCheque = tipoCheque;
         this.banco = banco;
         this.numero = numero;
-        this.fechaVencimiento = fechaVencimiento;
+        this.fechaVencimiento = fechaVencimiento2;
         this.cuitFirmante = cuitFirmante;
         this.tasaDescuento = tasaDescuento;
     }
