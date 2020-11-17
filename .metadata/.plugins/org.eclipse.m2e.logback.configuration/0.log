@@ -430,3 +430,5 @@
 2020-11-16 23:51:28,618 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\basti\eclipse-workspace\tpo_ioo\src\main\resources
 2020-11-16 23:51:28,620 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-11-16 23:51:28,621 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\basti\eclipse-workspace\tpo_ioo\src\test\resources
+2020-11-17 00:02:39,264 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-17 00:02:39,265 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\basti\eclipse-workspace\tpo_ioo\src\main\resources
