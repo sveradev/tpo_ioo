@@ -21,7 +21,6 @@ public class Cheque extends Operacion {
 
     private double tasaDescuento;
 
-
     public Cheque(
         BigDecimal importeDeOperacion
             , TipoCheque tipoCheque
