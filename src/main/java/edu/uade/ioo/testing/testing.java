@@ -11,17 +11,30 @@ import edu.uade.ioo.operacion.dominio.Cheque;
 import edu.uade.ioo.operacion.dominio.Operacion;
 import edu.uade.ioo.operacion.dominio.TipoOperacion;
 import edu.uade.ioo.socio.dominio.TipoEmpresa;
+import edu.uade.ioo.usuario.dominio.Historial;
+import edu.uade.ioo.vista.FrmPrincipal;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class testing {
     public static void main(String[] args) {
 
-        SocioProtector socPro1 = new SocioProtector("777-cuitsocPro1", "socPro1"
+        FrmPrincipal frmPrincipal = new FrmPrincipal("Login");
+//        inicializarSistema();
+    }
+
+
+    public static void inicializarSistema() {
+
+
+        SocioProtector socPro1 = new SocioProtector(
+                "777-cuitsocPro1"
+                , "socPro1"
                 , Instant.now()
                 , TipoEmpresa.PEQUENA
                 , "actividad"
@@ -131,11 +144,11 @@ public class testing {
                 , new Date(119,
                 01,
                 10));
+
         Aportes aportePrueba5 = new Aportes(234650.65
                 , new Date(119,
                 01,
                 10));
-
 
         socPro1.agregaAporte(aportePrueba);
         socPro1.agregaAporte(aportePrueba2);
@@ -149,7 +162,6 @@ public class testing {
         sistemaPrincipal.agregaSocioProtector(socPro2);
         sistemaPrincipal.agregaSocioProtector(socPro3);
 
-
         sistemaPrincipal.agregaSocioParticipe(socPar1);
         sistemaPrincipal.agregaSocioParticipe(socPar2);
         sistemaPrincipal.agregaSocioParticipe(socPar3);
@@ -160,7 +172,6 @@ public class testing {
         System.out.println("Probemos cargar un socio protector");
 
         sistemaPrincipal.printSocios();
-
 
         System.out.println(sistemaPrincipal.calculaFDR());
 
@@ -183,11 +194,11 @@ public class testing {
                 BigDecimal.valueOf(3000), soloCheques);
 
         sistemaPrincipal.getSocioParticipes().get(1).abrirLineaCredito(Instant.now().plus(30, ChronoUnit.DAYS),
-            BigDecimal.valueOf(30000), todasLasOperaciones);
+                BigDecimal.valueOf(30000), todasLasOperaciones);
 
 
         sistemaPrincipal.getSocioParticipes().get(2).abrirLineaCredito(Instant.now().plus(30, ChronoUnit.DAYS),
-            BigDecimal.valueOf(30000), todasLasOperaciones);
+                BigDecimal.valueOf(30000), todasLasOperaciones);
 
         System.out.println(socPar1.getLineaCredito().estaVigente());
         System.out.println(socPar2.getLineaCredito().estaVigente());
@@ -197,45 +208,53 @@ public class testing {
         System.out.println(socPar3.getLineaCredito().getOperacionesValidas());
 
 
+        socPar1.getLineaCredito().crearOperacionCheque(
+                BigDecimal.valueOf(1000)
+                , Cheque.TipoCheque.PROPIO
+                , "Galicia"
+                , "Cheque Num 6351"
+                , Instant.now()
+                , "cuit32"
+                , 0.5
+        );
 
         socPar1.getLineaCredito().crearOperacionCheque(
-                                        BigDecimal.valueOf(1000)
-                                        , Cheque.TipoCheque.PROPIO
-                                        ,"Galicia"
-                                        ,"Cheque Num 6351"
-                                        ,Instant.now()
-                                        ,"cuit32"
-                                        ,0.5
-                                            );
-
-        socPar1.getLineaCredito().crearOperacionCheque(
-                                        BigDecimal.valueOf(2000)
-                                        , Cheque.TipoCheque.TERCERO
-                                        ,"Galicia"
-                                        ,"Cheque Num 6351"
-                                        ,Instant.now()
-                                        ,"cuit32"
-                                        ,0.5
-                                            );
+                BigDecimal.valueOf(2000)
+                , Cheque.TipoCheque.TERCERO
+                , "Galicia"
+                , "Cheque Num 6351"
+                , Instant.now()
+                , "cuit32"
+                , 0.5
+        );
 
         socPar3.getLineaCredito().crearOperacionCheque(
-                                        BigDecimal.valueOf(200000000)
-                                        , Cheque.TipoCheque.TERCERO
-                                        ,"Galicia"
-                                        ,"Cheque Num 6351"
-                                        ,Instant.now()
-                                        ,"cuit32"
-                                        ,0.5
-                                            );
+                BigDecimal.valueOf(200000000)
+                , Cheque.TipoCheque.TERCERO
+                , "Galicia"
+                , "Cheque Num 6351"
+                , Instant.now()
+                , "cuit32"
+                , 0.5
+        );
 
-
-        Operacion operacion1 =         socPar1.getLineaCredito().getOperaciones().get(0);
+        Operacion operacion1 = socPar1.getLineaCredito().getOperaciones().get(0);
         System.out.println(operacion1);
         operacion1.emiteCertificado("cert-Num-42323");
 
         System.out.println(operacion1.getComision().calcularComision(Cheque.PORCENTAJE_COMISION, operacion1.getImporteDeOperacion()));
 
-    }
+//        Historial.agregarRegistroOperacion("PEstado1", "EstadoTestHasta");
+//        Historial.agregarRegistroOperacion("EstadoDesde2", "TestHasta");
+//        Historial.agregarRegistroOperacion("Estado desd4", "TestHasta");
 
+        Historial.agregarRegistroSocio("PEstado1", "EstadoTestHasta");
+        Historial.agregarRegistroSocio("EstadoDesde2", "TestHasta");
+        Historial.agregarRegistroSocio("Estado desd4", "TestHasta");
+
+        System.out.println(Historial.registroOperaciones);
+        System.out.println(Historial.registroSocios);
+
+    }
 
 }
